@@ -18,8 +18,8 @@ app.run(function($ionicPlatform, socket) {
       StatusBar.styleDefault();
     }
   });
+  socket.emit('join', 7);
 
-  socket.emit('join', {username: 'paul'});
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

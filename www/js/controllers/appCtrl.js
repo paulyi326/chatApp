@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers')
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
@@ -31,18 +31,4 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
-})
-
-.controller('FriendsCtrl', function($scope) {
-  $scope.friends = [
-    { title: 'Kobe', id: 1 },
-    { title: 'Kyrie', id: 2 },
-    { title: 'Tim', id: 3 },
-    { title: 'Jeremy', id: 4 },
-    { title: 'Manu', id: 5 },
-    { title: 'Dwight', id: 6 }
-  ];
-})
-
-.controller('FriendCtrl', function($scope, $stateParams) {
 });
