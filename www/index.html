@@ -12,6 +12,9 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
+    <!-- socket.io, the socket.io files on the server make this available on the client -->
+    <script src="http://wecudosChat.azurewebsites.net/socket.io/socket.io.js"></script>
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
@@ -19,7 +22,8 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
-    
+    <script src='js/services/socket.js'></script>
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
   </head>
