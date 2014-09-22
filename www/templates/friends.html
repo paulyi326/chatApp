@@ -4,7 +4,7 @@
   </ion-nav-buttons>
   <ion-content class="has-header">
     <ion-list>
-      <ion-item ng-repeat="friend in friends" href="#/app/friends/{{friend.id}}">
+      <ion-item ng-repeat="friend in friends" ui-sref='app.friendDetail({friendID: friend.id})'>
         {{friend.title}}
       </ion-item>
     </ion-list>

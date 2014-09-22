@@ -1,5 +1,16 @@
 <ion-view title="Friend">
   <ion-content class="has-header">
-    <h1>Friend</h1>
+
+    <ul>
+      <li ng-repeat='message in messages track by $index'>
+        {{message}}
+      </li>
+    </ul>
+
+    <form ng-submit="sendMessage(msg.text)">
+      <input placeholder='Enter message' ng-model="msg.text" />
+      <input type="submit" value="Submit" />
+    </form>
+
   </ion-content>
 </ion-view>
