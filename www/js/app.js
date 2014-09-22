@@ -6,19 +6,24 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'btford.socket-io', 'starter.controllers']);
 
-app.run(function($ionicPlatform, socket) {
-  $ionicPlatform.ready(function() {
+app.run(function($rootScope, $ionicPlatform, socket) {
+    $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        if(window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if(window.StatusBar) {
+          // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
+    // var id = prompt('what is your id?')
+
+    $rootScope.user = {
+        id: 7
     }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-  socket.emit('join', 7);
+    // socket.emit('join', $rootScope.user.id);
 
 })
 
