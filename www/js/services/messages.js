@@ -11,16 +11,14 @@ app.factory('Messages', function($rootScope, $http) {
             //     'not much, how are you?',
             //     'im good'
             // ];
+            console.log(friendID)
 
             return $http({
                         method: 'GET',
                         url: 'http://wecudoschat.azurewebsites.net/getMessages',
-                        data: {
+                        params: {
                             userID: $rootScope.user.id,
                             friendID: friendID
-                        },
-                        headers: {
-                           'Content-Type': 'application/json; charset=utf-8'
                         }
                     });
         }

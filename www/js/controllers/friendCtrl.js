@@ -1,34 +1,44 @@
 angular.module('starter.controllers')
 
-.controller('FriendCtrl', function($scope, $stateParams, socket, Messages) {
+.controller('FriendCtrl', function($rootScope, $scope, $stateParams, socket, Messages) {
 
     // This forwards the chat message event to angular so that
     // when switching back and forth between controllers, duplicate 
     // event listeners aren't created. Angular will clean up listeners
     // once a scope is destroyed
     socket.forward('chat message', $scope);
+    var friendID = $stateParams.friendID;
 
-    Messages.getMessages($stateParams.id).success(function(data, status, headers, config) {
-        console.log(data);
-    });
+    $scope.messages = [];
+
+    // retrieve messages from server.
+    // server will send the messages thru socket.io, so nothing
+    // to do in the success function in this call to server
+    Messages.getMessages(friendID)
+        .success(function(data, status, headers, config) {
+            console.log('success data', data);
+        }).error(function(data, status, headers, config) {
+            console.log('error data', data);
+        });
     
+    // events that are forwarded are prefixed with 'socket:', like here
+    // add incoming messages to messages array
+    $scope.$on('socket:chat message', function(evt, msg) {
+        $scope.messages.push(msg.fromUsername + ': ' + msg.text);
+    });
+
     $scope.msg = { text: '' };
 
     $scope.sendMessage = function(msg) {
-        console.log(msg);
+        console.log(msg); 
         var message = {
-            to: '7',
-            from: '7',
-            text: msg,
-            fromUsername: 'Paul'
+            to: friendID,
+            from: $rootScope.user.id,
+            text: msg
         }
         socket.emit('chat message', message);
         $scope.msg.text = '';
     };
 
-    // events that are forwarded are prefixed with 'socket:', like here
-    $scope.$on('socket:chat message', function(evt, msg) {
-        $scope.messages.push(msg.fromUsername + ': ' + msg.text);
-    });
 
 });

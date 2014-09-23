@@ -23,7 +23,7 @@ app.run(function($rootScope, $ionicPlatform, socket) {
     $rootScope.user = {
         id: 7
     }
-    // socket.emit('join', $rootScope.user.id);
+    socket.emit('join', $rootScope.user.id);
 
 })
 
