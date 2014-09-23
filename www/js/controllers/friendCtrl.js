@@ -11,16 +11,6 @@ angular.module('starter.controllers')
 
     $scope.messages = [];
 
-    // retrieve messages from server.
-    // server will send the messages thru socket.io, so nothing
-    // to do in the success function in this call to server
-    Messages.getMessages(friendID)
-        .success(function(data, status, headers, config) {
-            console.log('success data', data);
-        }).error(function(data, status, headers, config) {
-            console.log('error data', data);
-        });
-    
     // events that are forwarded are prefixed with 'socket:', like here
     // add incoming messages to messages array
     $scope.$on('socket:chat message', function(evt, msg) {
@@ -32,7 +22,10 @@ angular.module('starter.controllers')
     $scope.sendMessage = function(msg) {
         console.log(msg); 
         var message = {
-            to: friendID,
+            // this needs to be changed to msg.to eventually.
+            // i needed it to be 7, since no one else was in any room
+            // so messages weren't being sent 
+            to: $rootScope.user.id,
             from: $rootScope.user.id,
             text: msg
         }
@@ -40,5 +33,14 @@ angular.module('starter.controllers')
         $scope.msg.text = '';
     };
 
+    // retrieve messages from server.
+    // server will send the messages thru socket.io, so nothing
+    // to do in the success function in this call to server
+    Messages.getMessages(friendID)
+    .success(function(data, status, headers, config) {
+        console.log('success data', data);
+    }).error(function(data, status, headers, config) {
+        console.log('error data', data);
+    });
 
 });
