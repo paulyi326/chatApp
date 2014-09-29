@@ -7,29 +7,30 @@
 var app = angular.module('starter', ['ionic', 'btford.socket-io', 'starter.controllers']);
 
 app.run(function($rootScope, $ionicPlatform, socket) {
-    $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-        if(window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if(window.StatusBar) {
-          // org.apache.cordova.statusbar required
-            StatusBar.styleDefault();
-        }
-    });
-    // var id = prompt('what is your id?')
-
-    $rootScope.user = {
-        id: 7
+  $ionicPlatform.ready(function() {
+  // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+  // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
-    socket.emit('join', $rootScope.user.id);
+    if(window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+
+  // In real appliation, emitting the join will have to happen 
+  // upon a successful login.
+  $rootScope.user = {
+    id: 1
+  }
+  socket.emit('join', $rootScope.user.id);
 
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  // if none of the above states are matched, use this as the fallback
+  // if none of the below states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/friends');
 
   $stateProvider

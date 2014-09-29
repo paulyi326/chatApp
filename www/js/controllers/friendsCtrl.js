@@ -1,15 +1,17 @@
 angular.module('starter.controllers')
 
-.controller('FriendsCtrl', function($scope, $state, socket) {
+.controller('FriendsCtrl', function($rootScope, $scope, $state, socket, Database) {
   
-  $scope.friends = [
-    { title: 'Kobe', id: 1 },
-    { title: 'Kyrie', id: 2 },
-    { title: 'Tim', id: 3 },
-    { title: 'Jeremy', id: 4 },
-    { title: 'Manu', id: 5 },
-    { title: 'Dwight', id: 6 },
-    { title: 'paul', id: 7}
-  ];
+  $scope.friends = [];
+
+  Database.getFriends($rootScope.user.id).success(function(data) {
+
+    console.log('friends successfully retrieved', data);
+
+    $scope.friends = data;
+
+  }).error(function(data) {
+    console.log('error in retrieving friends', data);
+  });
 
 });
