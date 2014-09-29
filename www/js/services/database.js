@@ -12,12 +12,12 @@ app.factory('Database', function($rootScope, $http) {
       });
     },
 
-    getFriends: function(userID) {
+    login: function(userID) {
       return $http({
         method: 'GET',
         url: 'http://wecudoschat.azurewebsites.net/getFriends',
         params: {
-          userID: $rootScope.user.id
+          userID: userID
         }
       });
     }

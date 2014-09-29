@@ -21,19 +21,26 @@ app.run(function($rootScope, $ionicPlatform, socket) {
 
   // In real appliation, emitting the join will have to happen 
   // upon a successful login.
-  $rootScope.user = {
-    id: 1
-  }
-  socket.emit('join', $rootScope.user.id);
+  // $rootScope.user = {
+  //   id: 1
+  // }
+  // socket.emit('join', $rootScope.user.id);
 
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
 
   // if none of the below states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/friends');
+  $urlRouterProvider.otherwise('/login');
 
   $stateProvider
+
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl'
+    })
+
     .state('app', {
       url: "/app",
       abstract: true,

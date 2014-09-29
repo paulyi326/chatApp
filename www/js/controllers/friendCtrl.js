@@ -17,7 +17,7 @@ angular.module('starter.controllers')
   // events that are forwarded are prefixed with 'socket:', like here
   // add incoming messages to messages array
   $scope.$on('socket:chat message', function(evt, msg) {
-    $scope.messages.push(msg.fromUsername + ': ' + msg.text);
+    $scope.messages.push(msg.to + ': ' + msg.text);
   });
 
   $scope.msg = { text: '' };
@@ -31,7 +31,6 @@ angular.module('starter.controllers')
       // i needed it to be 7, since no one else was in any room
       // so messages weren't being sent 
       to: friendID,
-      
       from: $rootScope.user.id,
       text: msg
     }
