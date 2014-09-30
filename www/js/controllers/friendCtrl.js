@@ -17,29 +17,28 @@ angular.module('starter.controllers')
   // events that are forwarded are prefixed with 'socket:', like here
   // add incoming messages to messages array
   $scope.$on('socket:chat message', function(evt, msg) {
-    $scope.messages.push(msg.to + ': ' + msg.text);
+    $scope.messages.push(msg.fromUsername + ': ' + msg.text);
   });
 
   $scope.msg = { text: '' };
 
   $scope.sendMessage = function(msg) {
     console.log(msg); 
-    $scope.messages.push(msg);
+    $scope.messages.push($rootScope.user.name + ': ' + msg);
     console.log($scope.messages);
     var message = {
-      // this needs to be changed to msg.to eventually.
-      // i needed it to be 7, since no one else was in any room
-      // so messages weren't being sent 
       to: friendID,
       from: $rootScope.user.id,
-      text: msg
-    }
+      text: msg,
+      fromUsername: $rootScope.user.name
+    };
+    console.log('message', message);
     socket.emit('chat message', message);
 
     $scope.msg.text = '';
   };
 
-  // retrieve messages from server.
+  // retrieve messages from server
   // server will send the messages thru socket.io, so nothing
   // to do in the success function in this call to server
   Database.getMessages(friendID)

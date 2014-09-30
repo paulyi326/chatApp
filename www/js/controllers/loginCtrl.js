@@ -5,12 +5,15 @@ angular.module('starter.controllers')
   $scope.login.username;
   $scope.login.password;
 
-  
+
+  // called when user clicks login
+  // just login with id as 1, 4, or 7. That's what's in the db right now
+  // You can leave password blank
   $scope.login = function(id) {
 
     Database.login(id).success(function(data) {
       $rootScope.user = {
-        id: id,
+        id: +id, // converts string to number
         friends: data.friends,
         name: data.name
       };

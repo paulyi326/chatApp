@@ -4,6 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+
+// 'btford.socket-io is wrapper for socket.io that makes it compatible with angular'
 var app = angular.module('starter', ['ionic', 'btford.socket-io', 'starter.controllers']);
 
 app.run(function($rootScope, $ionicPlatform, socket) {
@@ -18,13 +20,6 @@ app.run(function($rootScope, $ionicPlatform, socket) {
       StatusBar.styleDefault();
     }
   });
-
-  // In real appliation, emitting the join will have to happen 
-  // upon a successful login.
-  // $rootScope.user = {
-  //   id: 1
-  // }
-  // socket.emit('join', $rootScope.user.id);
 
 })
 
